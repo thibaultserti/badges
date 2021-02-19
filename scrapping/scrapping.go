@@ -72,7 +72,6 @@ func getNbTotalUsersCryptohackCrawling() (nbTotalUsers string) {
 		match := reNbTotalUsers.FindString(e.Text)
 		if match != "" {
 			nbTotalUsers = match[7:]
-			fmt.Println(match)
 		}
 	})
 	completeURL := baseURL + "scoreboard/"
