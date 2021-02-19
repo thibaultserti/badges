@@ -1,7 +1,9 @@
 package scrapping
 
 import (
+	"errors"
 	"fmt"
+	"log"
 	"regexp"
 	"strconv"
 
@@ -20,9 +22,18 @@ const baseURL = "https://cryptohack.org/"
 
 func GetProfileCrawling(username string) {
 	profile := Profile{}
+	var err error = nil
+
 	profile.username = username
-	profile.rank = getRankCryptohackCrawling(username)
-	profile.score = getScoreCryptohackCrawling(username)
+
+	profile.rank, err = getRankCryptohackCrawling(username)
+	if err != nil {
+		log.Fatal("Error", err)
+	}
+	profile.score, err = getScoreCryptohackCrawling(username)
+	if err != nil {
+		log.Fatal("Error", err)
+	}
 	points, _ := strconv.Atoi(profile.score)
 	profile.level = fmt.Sprint(computeLevel(points))
 
@@ -35,31 +46,54 @@ func GetProfileCrawling(username string) {
 	fmt.Printf("Profile: %#v\n", profile)
 }
 
-func getRankCryptohackCrawling(username string) (rank string) {
-	c := colly.NewCollector()
+func getRankCryptohackCrawling(username string) (rank string, err error) {
+	if username == "" {
+		rank = "0"
+		err = errors.New("Username is empty")
+	} else {
+		c := colly.NewCollector()
 
-	reRank := regexp.MustCompile("#[0-9]*")
+		reRank := regexp.MustCompile("#[0-9]*")
 
-	c.OnHTML(".userPoints p", func(e *colly.HTMLElement) {
-		match := reRank.FindString(e.Text)
-		if match != "" {
-			rank = match[1:]
-		}
-	})
-	completeURL := baseURL + "user/" + username
-	c.Visit(completeURL)
+		c.OnResponse(func(r *colly.Response) {
+			if r.StatusCode == 404 {
+				rank = "0"
+				err = errors.New("Username doesn't exist")
+			}
+		})
+
+		c.OnHTML(".userPoints p", func(e *colly.HTMLElement) {
+			match := reRank.FindString(e.Text)
+			if match != "" {
+				rank = match[1:]
+			}
+		})
+		completeURL := baseURL + "user/" + username
+		c.Visit(completeURL)
+	}
 	return
 }
 
-func getScoreCryptohackCrawling(username string) (score string) {
-	c := colly.NewCollector()
+func getScoreCryptohackCrawling(username string) (score string, err error) {
+	if username == "" {
+		score = "0"
+		err = errors.New("Username is empty")
+	} else {
+		c := colly.NewCollector()
 
-	c.OnHTML("#userScore", func(e *colly.HTMLElement) {
-		score = e.Text
-	})
+		c.OnHTML("#userScore", func(e *colly.HTMLElement) {
+			score = e.Text
+		})
 
-	completeURL := baseURL + "user/" + username
-	c.Visit(completeURL)
+		c.OnResponse(func(r *colly.Response) {
+			if r.StatusCode == 404 {
+				score = "0"
+				err = errors.New("Username doesn't exist")
+			}
+		})
+		completeURL := baseURL + "user/" + username
+		c.Visit(completeURL)
+	}
 	return
 }
 

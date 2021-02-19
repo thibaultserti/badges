@@ -9,24 +9,55 @@ const userTest = "thibaultserti"
 const userNotExisting = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 
 func TestGetRankCryptohackCrawling(t *testing.T) {
-	_, err := strconv.Atoi(getRankCryptohackCrawling(userTest))
+	rank, err := getRankCryptohackCrawling(userTest)
+	_, err = strconv.Atoi(rank)
 
 	if err != nil {
-		t.Error("Not a int")
+		t.Error("Test failed; rank is not a int", rank)
 	}
 }
 
 func TestGetScoreCryptohackCrawling(t *testing.T) {
-	_, err := strconv.Atoi(getScoreCryptohackCrawling(userTest))
+	score, err := getScoreCryptohackCrawling(userTest)
+	_, err = strconv.Atoi(score)
 	if err != nil {
-		t.Error("Not a int")
+		t.Error("Test failed: score is not a int", score)
+	}
+}
+
+func TestGetRankNullUserCryptohackCrawling(t *testing.T) {
+	_, err := getRankCryptohackCrawling("")
+	if err == nil {
+		t.Error("Test failed: no error for null user")
+	}
+}
+
+func TestGetScoreNullUserCryptohackCrawling(t *testing.T) {
+	_, err := getScoreCryptohackCrawling("")
+	if err == nil {
+		t.Error("Test failed: no error for null user")
+	}
+}
+
+func TestGetRankAbsentUserCryptohackCrawling(t *testing.T) {
+	_, err := getRankCryptohackCrawling(userNotExisting)
+
+	if err != nil {
+		t.Error("Test failed: no error for absent user")
+	}
+}
+
+func TestGetScoreAbsentUserCryptohackCrawling(t *testing.T) {
+	_, err := getScoreCryptohackCrawling(userNotExisting)
+	if err != nil {
+		t.Error("Test failed: no error for absent user")
 	}
 }
 
 func TestGetNbTotalUsersCryptohackCrawling(t *testing.T) {
-	_, err := strconv.Atoi(getNbTotalUsersCryptohackCrawling())
+	nbTotalUsers, err := strconv.Atoi(getNbTotalUsersCryptohackCrawling())
 	if err != nil {
-		t.Error("Not a int")
+		t.Error("Testt failed: nbTotalUsers is not a int", nbTotalUsers)
 	}
 
 }
