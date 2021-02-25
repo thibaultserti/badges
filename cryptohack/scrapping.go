@@ -1,4 +1,4 @@
-package scrapping
+package cryptohack
 
 import (
 	"errors"
@@ -10,18 +10,10 @@ import (
 	"github.com/gocolly/colly/v2"
 )
 
-type Profile struct {
-	username     string
-	score        string
-	level        string
-	rank         string
-	rankRelative string
-}
-
 const baseURL = "https://cryptohack.org/"
 
-func GetProfileCrawling(username string) {
-	profile := Profile{}
+func getProfileCrawling(username string) ProfileCryptohack {
+	profile := ProfileCryptohack{}
 	var err error = nil
 
 	profile.username = username
@@ -40,10 +32,10 @@ func GetProfileCrawling(username string) {
 	nbTotalUsers, _ := strconv.Atoi(getNbTotalUsersCryptohackCrawling())
 	fmt.Println(nbTotalUsers)
 	rank, _ := strconv.Atoi(profile.rank)
-
+	profile.nbTotalUsers = fmt.Sprint(nbTotalUsers)
 	profile.rankRelative = fmt.Sprintf("%03.1f%%", float64(rank)/float64(nbTotalUsers)*100.)
 
-	fmt.Printf("Profile: %#v\n", profile)
+	return profile
 }
 
 func getRankCryptohackCrawling(username string) (rank string, err error) {

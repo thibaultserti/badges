@@ -1,4 +1,4 @@
-package scrapping
+package cryptohack
 
 import (
 	"strconv"
