@@ -35,9 +35,31 @@ func CreateCryptohackBadge(username string, theme string) error {
 		log.Fatal(err)
 	}
 
+	// load icons
+	star, err := gg.LoadImage("icons/star.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	thunder, err := gg.LoadImage("icons/thunder.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	stats, err := gg.LoadImage("icons/stats.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+	trophy, err := gg.LoadImage("icons/trophy.png")
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	// resize images
 	logoCryptohack = resize.Resize(0, 0.4*height, logoCryptohack, resize.Lanczos3)
 	userCryptohack = resize.Resize(0, 0.8*height, userCryptohack, resize.Lanczos3)
+	star = resize.Resize(width/24, 0, star, resize.Lanczos3)
+	thunder = resize.Resize(width/24, 0, thunder, resize.Lanczos3)
+	stats = resize.Resize(width/24, 0, stats, resize.Lanczos3)
+	trophy = resize.Resize(width/24, 0, trophy, resize.Lanczos3)
 
 	// crawl profile
 	profile := getProfileCrawling(username)
@@ -62,9 +84,13 @@ func CreateCryptohackBadge(username string, theme string) error {
 	// write other text
 	dc.SetFontFace(fontOther)
 	dc.DrawStringAnchored("Level: "+profile.level, width/5, 0.85*height, 0.5, 0.5)
+	dc.DrawImageAnchored(thunder, 0.1*width, 0.85*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.score+" points", width/2, 0.4*height, 0.5, 0.5)
+	dc.DrawImageAnchored(star, 0.4*width, 0.4*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.5*height, 0.5, 0.5)
+	dc.DrawImageAnchored(trophy, 0.4*width, 0.5*height, 0.5, 0.5)
 	dc.DrawStringAnchored("TOP "+profile.rankRelative, width/2, 0.6*height, 0.5, 0.5)
+	dc.DrawImageAnchored(stats, 0.4*width, 0.6*height, 0.5, 0.5)
 
 	// draw images
 	dc.DrawImageAnchored(logoCryptohack, 6*width/7, height/3, 0.5, 0.5)
