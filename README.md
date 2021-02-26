@@ -1,7 +1,5 @@
 # Badges generator for challenges websites
 
-![GitHub](https://img.shields.io/github/license/thibaultserti/badges)
-
 ## ✨ Inspiration
 
 Some challenges websites like [tryhackme](https://tryhackme.org) or [hackthebox](https://hackthebox.eu) use badges you can export to have a synopsis of your progression on the website. I find it very cool so I decided to implement my own for other website I use which does'nt have this sort of badges.
@@ -25,7 +23,7 @@ go build .
 
 ### Rootme (dark)
 
-![](examples/rootme.png)
+![](https://github.com/thibaultserti/badges/raw/examples/rootme.png)
 ### Newbiecontest (light)
 ![](examples/newbiecontest.png)
 
