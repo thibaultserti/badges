@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/thibaultserti/badges/cryptohack"
+	"github.com/thibaultserti/badges/newbiecontest"
 )
 
 func contains(s []string, e string) bool {
@@ -42,5 +42,5 @@ func main() {
 		os.Exit(1)
 	}
 
-	cryptohack.CreateCryptohackBadge(*username, *theme)
+	newbiecontest.CreateNewbiecontestBadge(85319, *theme)
 }

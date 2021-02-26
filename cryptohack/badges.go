@@ -6,6 +6,7 @@ import (
 	"github.com/fogleman/gg"
 	"github.com/golang/freetype/truetype"
 	"github.com/nfnt/resize"
+	"github.com/thibaultserti/badges/common"
 	"golang.org/x/image/font/gofont/goregular"
 )
 
@@ -13,15 +14,15 @@ const width, height = 400, 200
 
 // CreateCryptohackBadge creates the cryptohack badge
 func CreateCryptohackBadge(username string, theme string) error {
-	colorBG := new(Color)
-	colorFG := new(Color)
+	colorBG := new(common.Color)
+	colorFG := new(common.Color)
 
 	if theme == "dark" {
-		colorBG.r, colorBG.g, colorBG.b = 12./255., 18./255., 33./255.
-		colorFG.r, colorFG.g, colorFG.b = 1, 1, 1
+		colorBG.R, colorBG.G, colorBG.B = 12./255., 18./255., 33./255.
+		colorFG.R, colorFG.G, colorFG.B = 1, 1, 1
 	} else if theme == "light" {
-		colorBG.r, colorBG.g, colorBG.b = 1, 1, 1
-		colorFG.r, colorFG.g, colorFG.b = 240./255., 78./255., 35./255.
+		colorBG.R, colorBG.G, colorBG.B = 1, 1, 1
+		colorFG.R, colorFG.G, colorFG.B = 240./255., 78./255., 35./255.
 	}
 
 	// load images
@@ -72,11 +73,11 @@ func CreateCryptohackBadge(username string, theme string) error {
 	dc := gg.NewContext(width, height)
 
 	// set background color
-	dc.SetRGB(colorBG.r, colorBG.g, colorBG.b)
+	dc.SetRGB(colorBG.R, colorBG.G, colorBG.B)
 	dc.Clear()
 
 	// set font color
-	dc.SetRGB(colorFG.r, colorFG.g, colorFG.b)
+	dc.SetRGB(colorFG.R, colorFG.G, colorFG.B)
 	// set username text
 	dc.SetFontFace(fontUsername)
 	dc.DrawStringAnchored(profile.username, width/2, height/4, 0.5, 0.5)

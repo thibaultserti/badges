@@ -5,7 +5,7 @@ import (
 	"errors"
 	"fmt"
 	"image"
-	_ "image/jpeg"
+	_ "image/jpeg" // to deal with avatar
 	_ "image/png"
 	"io/ioutil"
 	"log"
@@ -19,7 +19,7 @@ import (
 
 const baseURL = "https://newbiecontest.org/"
 
-func GetProfileCrawling(id int) ProfileNewbiecontest {
+func getProfileCrawling(id int) ProfileNewbiecontest {
 	profile := ProfileNewbiecontest{}
 	var err error = nil
 	var rankTotal string
@@ -86,8 +86,6 @@ func getNewbiecontestCrawling(id int) (rank string, score string, level string, 
 			if err != nil {
 				log.Fatal("Error", err)
 			}
-			fmt.Println(avatar)
-
 		})
 		c.OnResponse(func(r *colly.Response) {
 			if r.StatusCode == 404 {

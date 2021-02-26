@@ -14,10 +14,3 @@ func computeLevel(score int) (level int) {
 	}
 	return
 }
-
-// Color represents the color with rgb value between 0 and 1
-type Color struct {
-	r float64
-	g float64
-	b float64
-}
