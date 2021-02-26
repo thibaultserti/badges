@@ -1,4 +1,4 @@
-package newbiecontest
+package rootme
 
 import (
 	"log"
@@ -12,13 +12,13 @@ import (
 
 const width, height = 400, 200
 
-// CreateNewbiecontestBadge creates the Newbiecontest badge
-func CreateNewbiecontestBadge(id int, theme string) error {
+// CreateRootmeBadge creates the Rootme badge
+func CreateRootmeBadge(username string, theme string) error {
 	colorBG := new(common.Color)
 	colorFG := new(common.Color)
 
 	// crawl profile
-	profile := getProfileCrawling(id)
+	profile := getProfileCrawling(username)
 
 	if theme == "dark" {
 		colorBG.R, colorBG.G, colorBG.B = 0, 0, 0
@@ -29,12 +29,12 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 	}
 
 	// load images
-	logoNewbiecontest, err := gg.LoadImage("newbiecontest/images/newbiecontest-" + theme + ".png")
+	logoRootme, err := gg.LoadImage("rootme/images/rootme-" + theme + ".png")
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	userNewbiecontest := profile.avatar
+	userRootme := profile.avatar
 
 	// load icons
 	star, err := gg.LoadImage("icons/star.png")
@@ -55,8 +55,8 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 	}
 
 	// resize images
-	logoNewbiecontest = resize.Resize(0, 0.4*height, logoNewbiecontest, resize.Lanczos3)
-	userNewbiecontest = resize.Resize(0, 0.6*height, userNewbiecontest, resize.Lanczos3)
+	logoRootme = resize.Resize(0, 0.4*height, logoRootme, resize.Lanczos3)
+	userRootme = resize.Resize(0, 0.6*height, userRootme, resize.Lanczos3)
 	star = resize.Resize(width/24, 0, star, resize.Lanczos3)
 	thunder = resize.Resize(width/24, 0, thunder, resize.Lanczos3)
 	stats = resize.Resize(width/24, 0, stats, resize.Lanczos3)
@@ -77,7 +77,7 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 	dc.SetRGB(colorFG.R, colorFG.G, colorFG.B)
 	// set username text
 	dc.SetFontFace(fontUsername)
-	dc.DrawStringAnchored(profile.username, width/2, height/4, 0.5, 0.5)
+	dc.DrawStringAnchored(profile.username, width/2, height/4, 0.3, 0.5)
 
 	// write other text
 	dc.SetFontFace(fontOther)
@@ -91,9 +91,9 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 	dc.DrawImageAnchored(stats, 0.4*width, 0.6*height, 0.5, 0.5)
 
 	// draw images
-	dc.DrawImageAnchored(logoNewbiecontest, 6*width/7, height/3, 0.5, 0.5)
-	dc.DrawImageAnchored(userNewbiecontest, width/5, height/2, 0.5, 0.6)
+	dc.DrawImageAnchored(logoRootme, 7*width/8, height/3, 0.5, 0.5)
+	dc.DrawImageAnchored(userRootme, width/5, height/2, 0.5, 0.6)
 
-	err = dc.SavePNG("newbiecontest.png") // save it
+	err = dc.SavePNG("rootme.png") // save it
 	return err
 }

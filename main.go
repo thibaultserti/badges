@@ -9,6 +9,7 @@ import (
 
 	"github.com/thibaultserti/badges/cryptohack"
 	"github.com/thibaultserti/badges/newbiecontest"
+	"github.com/thibaultserti/badges/rootme"
 )
 
 func contains(s []string, e string) bool {
@@ -22,7 +23,7 @@ func contains(s []string, e string) bool {
 
 func main() {
 
-	availableWebsites := map[string]([]string){"cryptohack": {"dark", "light"}, "newbiecontest": {"dark", "light"}}
+	availableWebsites := map[string]([]string){"cryptohack": {"dark", "light"}, "newbiecontest": {"dark", "light"}, "rootme": {"dark", "light"}}
 
 	website := flag.String("website", "cryptohack", "Specify the challenge website from which you want to create the image (Available: cryptohack)")
 	username := flag.String("username", "", "Specify the username or the id (depending on the website)")
@@ -52,5 +53,7 @@ func main() {
 		newbiecontest.CreateNewbiecontestBadge(id, *theme)
 	} else if *website == "cryptohack" {
 		cryptohack.CreateCryptohackBadge(*username, *theme)
+	} else if *website == "rootme" {
+		rootme.CreateRootmeBadge(*username, *theme)
 	}
 }
