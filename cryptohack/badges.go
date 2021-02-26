@@ -88,9 +88,9 @@ func CreateCryptohackBadge(username string, theme string) error {
 	dc.DrawImageAnchored(thunder, 0.1*width, 0.85*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.score+" points", width/2, 0.4*height, 0.5, 0.5)
 	dc.DrawImageAnchored(star, 0.4*width, 0.4*height, 0.5, 0.5)
-	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.5*height, 0.5, 0.5)
+	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.5*height, 0.4, 0.5)
 	dc.DrawImageAnchored(trophy, 0.4*width, 0.5*height, 0.5, 0.5)
-	dc.DrawStringAnchored("TOP "+profile.rankRelative, width/2, 0.6*height, 0.5, 0.5)
+	dc.DrawStringAnchored("TOP "+profile.rankRelative, width/2, 0.6*height, 0.4, 0.5)
 	dc.DrawImageAnchored(stats, 0.4*width, 0.6*height, 0.5, 0.5)
 
 	// draw images

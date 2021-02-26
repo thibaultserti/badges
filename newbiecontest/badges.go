@@ -21,11 +21,11 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 	profile := getProfileCrawling(id)
 
 	if theme == "dark" {
-		colorBG.R, colorBG.G, colorBG.B = 12./255., 18./255., 33./255.
+		colorBG.R, colorBG.G, colorBG.B = 0, 0, 0
 		colorFG.R, colorFG.G, colorFG.B = 1, 1, 1
 	} else if theme == "light" {
 		colorBG.R, colorBG.G, colorBG.B = 1, 1, 1
-		colorFG.R, colorFG.G, colorFG.B = 240./255., 78./255., 35./255.
+		colorFG.R, colorFG.G, colorFG.B = 0, 0, 0
 	}
 
 	// load images
@@ -56,7 +56,7 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 
 	// resize images
 	logoNewbiecontest = resize.Resize(0, 0.4*height, logoNewbiecontest, resize.Lanczos3)
-	userNewbiecontest = resize.Resize(0, 0.8*height, userNewbiecontest, resize.Lanczos3)
+	userNewbiecontest = resize.Resize(0, 0.6*height, userNewbiecontest, resize.Lanczos3)
 	star = resize.Resize(width/24, 0, star, resize.Lanczos3)
 	thunder = resize.Resize(width/24, 0, thunder, resize.Lanczos3)
 	stats = resize.Resize(width/24, 0, stats, resize.Lanczos3)
@@ -85,9 +85,9 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 	dc.DrawImageAnchored(thunder, 0.1*width, 0.85*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.score+" points", width/2, 0.4*height, 0.5, 0.5)
 	dc.DrawImageAnchored(star, 0.4*width, 0.4*height, 0.5, 0.5)
-	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.5*height, 0.5, 0.5)
+	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.5*height, 0.4, 0.5)
 	dc.DrawImageAnchored(trophy, 0.4*width, 0.5*height, 0.5, 0.5)
-	dc.DrawStringAnchored("TOP "+profile.rankRelative, width/2, 0.6*height, 0.5, 0.5)
+	dc.DrawStringAnchored("TOP "+profile.rankRelative, width/2, 0.6*height, 0.4, 0.5)
 	dc.DrawImageAnchored(stats, 0.4*width, 0.6*height, 0.5, 0.5)
 
 	// draw images

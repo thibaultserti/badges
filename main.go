@@ -3,8 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"log"
 	"os"
+	"strconv"
 
+	"github.com/thibaultserti/badges/cryptohack"
 	"github.com/thibaultserti/badges/newbiecontest"
 )
 
@@ -19,10 +22,10 @@ func contains(s []string, e string) bool {
 
 func main() {
 
-	availableWebsites := map[string]([]string){"cryptohack": {"dark", "light"}}
+	availableWebsites := map[string]([]string){"cryptohack": {"dark", "light"}, "newbiecontest": {"dark", "light"}}
 
 	website := flag.String("website", "cryptohack", "Specify the challenge website from which you want to create the image (Available: cryptohack)")
-	username := flag.String("username", "", "Specify the username")
+	username := flag.String("username", "", "Specify the username or the id (depending on the website)")
 	theme := flag.String("theme", "dark", "Specify the theme")
 
 	flag.Parse()
@@ -41,6 +44,13 @@ func main() {
 		fmt.Println("Theme not supported for this website")
 		os.Exit(1)
 	}
-
-	newbiecontest.CreateNewbiecontestBadge(85319, *theme)
+	if *website == "newbiecontest" {
+		id, err := strconv.Atoi(*username)
+		if err != nil {
+			log.Fatal(err)
+		}
+		newbiecontest.CreateNewbiecontestBadge(id, *theme)
+	} else if *website == "cryptohack" {
+		cryptohack.CreateCryptohackBadge(*username, *theme)
+	}
 }
