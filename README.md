@@ -23,7 +23,7 @@ go build .
 
 ### Rootme (dark)
 
-![](https://github.com/thibaultserti/badges/raw/examples/rootme.png)
+![](examples/rootme.png)
 ### Newbiecontest (light)
 ![](examples/newbiecontest.png)
 
