@@ -41,7 +41,6 @@ func getProfileCrawling(username string) ProfileRootme {
 	profile.nbTotalUsers = fmt.Sprint(nbTotalUsers)
 	profile.rankRelative = fmt.Sprintf("%03.1f%%", float64(rank)/float64(nbTotalUsers)*100.)
 
-	fmt.Println(profile)
 	return profile
 }
 

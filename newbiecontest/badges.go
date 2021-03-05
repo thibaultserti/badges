@@ -10,7 +10,7 @@ import (
 	"golang.org/x/image/font/gofont/goregular"
 )
 
-const width, height = 400, 200
+const width, height = 400, 160
 
 // CreateNewbiecontestBadge creates the Newbiecontest badge
 func CreateNewbiecontestBadge(id int, theme string, filename string) error {
@@ -57,15 +57,15 @@ func CreateNewbiecontestBadge(id int, theme string, filename string) error {
 	// resize images
 	logoNewbiecontest = resize.Resize(0, 0.4*height, logoNewbiecontest, resize.Lanczos3)
 	userNewbiecontest = resize.Resize(0, 0.6*height, userNewbiecontest, resize.Lanczos3)
-	star = resize.Resize(width/24, 0, star, resize.Lanczos3)
-	thunder = resize.Resize(width/24, 0, thunder, resize.Lanczos3)
-	stats = resize.Resize(width/24, 0, stats, resize.Lanczos3)
-	trophy = resize.Resize(width/24, 0, trophy, resize.Lanczos3)
+	star = resize.Resize(width/20, 0, star, resize.Lanczos3)
+	thunder = resize.Resize(width/20, 0, thunder, resize.Lanczos3)
+	stats = resize.Resize(width/20, 0, stats, resize.Lanczos3)
+	trophy = resize.Resize(width/20, 0, trophy, resize.Lanczos3)
 
 	// setup fonts
 	font, err := truetype.Parse(goregular.TTF)
 	fontUsername := truetype.NewFace(font, &truetype.Options{Size: width / 16})
-	fontOther := truetype.NewFace(font, &truetype.Options{Size: width / 32})
+	fontOther := truetype.NewFace(font, &truetype.Options{Size: width / 28})
 
 	dc := gg.NewContext(width, height)
 
@@ -83,12 +83,12 @@ func CreateNewbiecontestBadge(id int, theme string, filename string) error {
 	dc.SetFontFace(fontOther)
 	dc.DrawStringAnchored("Level: "+profile.level, width/5, 0.85*height, 0.4, 0.5)
 	dc.DrawImageAnchored(thunder, 0.1*width, 0.85*height, 0.5, 0.5)
-	dc.DrawStringAnchored(profile.score+" points", width/2, 0.4*height, 0.4, 0.5)
-	dc.DrawImageAnchored(star, 0.4*width, 0.4*height, 0.5, 0.5)
-	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.5*height, 0.4, 0.5)
-	dc.DrawImageAnchored(trophy, 0.4*width, 0.5*height, 0.5, 0.5)
-	dc.DrawStringAnchored("TOP "+profile.rankRelative, width/2, 0.6*height, 0.4, 0.5)
-	dc.DrawImageAnchored(stats, 0.4*width, 0.6*height, 0.5, 0.5)
+	dc.DrawStringAnchored(profile.score+" points", width/2, 0.45*height, 0.4, 0.5)
+	dc.DrawImageAnchored(star, 0.4*width, 0.45*height, 0.5, 0.5)
+	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.6*height, 0.4, 0.5)
+	dc.DrawImageAnchored(trophy, 0.4*width, 0.6*height, 0.5, 0.5)
+	dc.DrawStringAnchored("TOP "+profile.rankRelative, width/2, 0.75*height, 0.4, 0.5)
+	dc.DrawImageAnchored(stats, 0.4*width, 0.75*height, 0.5, 0.5)
 
 	// draw images
 	dc.DrawImageAnchored(logoNewbiecontest, 6*width/7, height/3, 0.5, 0.5)
