@@ -33,6 +33,10 @@ func CreateRootmeBadge(username string, theme string, filename string) error {
 	if err != nil {
 		log.Fatal(err)
 	}
+	nameRootme, err := gg.LoadImage("rootme/images/rootme-name-" + theme + ".png")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	userRootme := profile.avatar
 
@@ -56,6 +60,7 @@ func CreateRootmeBadge(username string, theme string, filename string) error {
 
 	// resize images
 	logoRootme = resize.Resize(0, 0.4*height, logoRootme, resize.Lanczos3)
+	nameRootme = resize.Resize(0, 0.25*height, nameRootme, resize.Lanczos3)
 	userRootme = resize.Resize(0, 0.6*height, userRootme, resize.Lanczos3)
 	star = resize.Resize(width/20, 0, star, resize.Lanczos3)
 	thunder = resize.Resize(width/20, 0, thunder, resize.Lanczos3)
@@ -81,7 +86,7 @@ func CreateRootmeBadge(username string, theme string, filename string) error {
 
 	// write other text
 	dc.SetFontFace(fontOther)
-	dc.DrawStringAnchored("Level: "+profile.level, width/5, 0.85*height, 0.4, 0.5)
+	dc.DrawStringAnchored("Level: "+profile.level, width/5, 0.85*height, 0.35, 0.5)
 	dc.DrawImageAnchored(thunder, 0.1*width, 0.85*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.score+" points", width/2, 0.45*height, 0.4, 0.5)
 	dc.DrawImageAnchored(star, 0.4*width, 0.45*height, 0.6, 0.5)
@@ -92,6 +97,7 @@ func CreateRootmeBadge(username string, theme string, filename string) error {
 
 	// draw images
 	dc.DrawImageAnchored(logoRootme, 7*width/8, height/3, 0.5, 0.5)
+	dc.DrawImageAnchored(nameRootme, 6*width/7, 0.75*height, 0.5, 0.5)
 	dc.DrawImageAnchored(userRootme, width/5, height/2, 0.5, 0.6)
 
 	err = dc.SavePNG(filename) // save it

@@ -33,6 +33,10 @@ func CreateNewbiecontestBadge(id int, theme string, filename string) error {
 	if err != nil {
 		log.Fatal(err)
 	}
+	nameNewbiecontest, err := gg.LoadImage("newbiecontest/images/newbiecontest-name-" + theme + ".png")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	userNewbiecontest := profile.avatar
 
@@ -56,6 +60,7 @@ func CreateNewbiecontestBadge(id int, theme string, filename string) error {
 
 	// resize images
 	logoNewbiecontest = resize.Resize(0, 0.4*height, logoNewbiecontest, resize.Lanczos3)
+	nameNewbiecontest = resize.Resize(0, 0.175*height, nameNewbiecontest, resize.Lanczos3)
 	userNewbiecontest = resize.Resize(0, 0.6*height, userNewbiecontest, resize.Lanczos3)
 	star = resize.Resize(width/20, 0, star, resize.Lanczos3)
 	thunder = resize.Resize(width/20, 0, thunder, resize.Lanczos3)
@@ -92,6 +97,7 @@ func CreateNewbiecontestBadge(id int, theme string, filename string) error {
 
 	// draw images
 	dc.DrawImageAnchored(logoNewbiecontest, 6*width/7, height/3, 0.5, 0.5)
+	dc.DrawImageAnchored(nameNewbiecontest, 4*width/5, 0.9*height, 0.5, 0.5)
 	dc.DrawImageAnchored(userNewbiecontest, width/5, height/2, 0.5, 0.6)
 
 	err = dc.SavePNG(filename) // save it

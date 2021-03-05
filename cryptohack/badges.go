@@ -30,6 +30,10 @@ func CreateCryptohackBadge(username string, theme string, filename string) error
 	if err != nil {
 		log.Fatal(err)
 	}
+	nameCryptohack, err := gg.LoadImage("cryptohack/images/cryptohack-name-" + theme + ".png")
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	userCryptohack, err := gg.LoadImage("cryptohack/images/user.png")
 	if err != nil {
@@ -56,6 +60,7 @@ func CreateCryptohackBadge(username string, theme string, filename string) error
 
 	// resize images
 	logoCryptohack = resize.Resize(0, 0.4*height, logoCryptohack, resize.Lanczos3)
+	nameCryptohack = resize.Resize(0, 0.175*height, nameCryptohack, resize.Lanczos3)
 	userCryptohack = resize.Resize(0, 0.8*height, userCryptohack, resize.Lanczos3)
 	star = resize.Resize(width/20, 0, star, resize.Lanczos3)
 	thunder = resize.Resize(width/20, 0, thunder, resize.Lanczos3)
@@ -95,6 +100,7 @@ func CreateCryptohackBadge(username string, theme string, filename string) error
 
 	// draw images
 	dc.DrawImageAnchored(logoCryptohack, 6*width/7, height/3, 0.5, 0.5)
+	dc.DrawImageAnchored(nameCryptohack, 4*width/5, 0.9*height, 0.5, 0.5)
 	dc.DrawImageAnchored(userCryptohack, width/5, height/2, 0.5, 0.6)
 
 	err = dc.SavePNG(filename) // save it
