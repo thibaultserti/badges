@@ -13,7 +13,7 @@ import (
 const width, height = 400, 200
 
 // CreateCryptohackBadge creates the cryptohack badge
-func CreateCryptohackBadge(username string, theme string) error {
+func CreateCryptohackBadge(username string, theme string, filename string) error {
 	colorBG := new(common.Color)
 	colorFG := new(common.Color)
 
@@ -97,6 +97,6 @@ func CreateCryptohackBadge(username string, theme string) error {
 	dc.DrawImageAnchored(logoCryptohack, 6*width/7, height/3, 0.5, 0.5)
 	dc.DrawImageAnchored(userCryptohack, width/5, height/2, 0.5, 0.6)
 
-	err = dc.SavePNG("cryptohack.png") // save it
+	err = dc.SavePNG(filename) // save it
 	return err
 }

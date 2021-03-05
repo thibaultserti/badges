@@ -11,7 +11,7 @@ go build .
 ```
 
 ```bash
-./badges --website cryptohack --username thibaultserti --theme dark
+./badges --website cryptohack --username thibaultserti --theme dark --output cryptohack.png
 ```
 
 **Supported websites:** [`cryptohack`](https://cryptohack.org) [`rootme`](https://root-me.org) [`newbiecontest`](https://newbiecontest.org)

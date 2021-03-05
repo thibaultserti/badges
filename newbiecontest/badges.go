@@ -13,7 +13,7 @@ import (
 const width, height = 400, 200
 
 // CreateNewbiecontestBadge creates the Newbiecontest badge
-func CreateNewbiecontestBadge(id int, theme string) error {
+func CreateNewbiecontestBadge(id int, theme string, filename string) error {
 	colorBG := new(common.Color)
 	colorFG := new(common.Color)
 
@@ -94,6 +94,6 @@ func CreateNewbiecontestBadge(id int, theme string) error {
 	dc.DrawImageAnchored(logoNewbiecontest, 6*width/7, height/3, 0.5, 0.5)
 	dc.DrawImageAnchored(userNewbiecontest, width/5, height/2, 0.5, 0.6)
 
-	err = dc.SavePNG("newbiecontest.png") // save it
+	err = dc.SavePNG(filename) // save it
 	return err
 }

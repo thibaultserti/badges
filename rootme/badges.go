@@ -13,7 +13,7 @@ import (
 const width, height = 400, 200
 
 // CreateRootmeBadge creates the Rootme badge
-func CreateRootmeBadge(username string, theme string) error {
+func CreateRootmeBadge(username string, theme string, filename string) error {
 	colorBG := new(common.Color)
 	colorFG := new(common.Color)
 
@@ -94,6 +94,6 @@ func CreateRootmeBadge(username string, theme string) error {
 	dc.DrawImageAnchored(logoRootme, 7*width/8, height/3, 0.5, 0.5)
 	dc.DrawImageAnchored(userRootme, width/5, height/2, 0.5, 0.6)
 
-	err = dc.SavePNG("rootme.png") // save it
+	err = dc.SavePNG(filename) // save it
 	return err
 }

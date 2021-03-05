@@ -28,6 +28,7 @@ func main() {
 	website := flag.String("website", "cryptohack", "Specify the challenge website from which you want to create the image (Available: cryptohack)")
 	username := flag.String("username", "", "Specify the username or the id (depending on the website)")
 	theme := flag.String("theme", "dark", "Specify the theme")
+	filename := flag.String("output", "", "Image output name (default <website>.png")
 
 	flag.Parse()
 
@@ -41,6 +42,10 @@ func main() {
 		os.Exit(1)
 	}
 
+	if *filename == "" {
+		*filename = *website + ".png"
+	}
+
 	if !contains(availableWebsites[*website], *theme) {
 		fmt.Println("Theme not supported for this website")
 		os.Exit(1)
@@ -50,10 +55,10 @@ func main() {
 		if err != nil {
 			log.Fatal(err)
 		}
-		newbiecontest.CreateNewbiecontestBadge(id, *theme)
+		newbiecontest.CreateNewbiecontestBadge(id, *theme, *filename)
 	} else if *website == "cryptohack" {
-		cryptohack.CreateCryptohackBadge(*username, *theme)
+		cryptohack.CreateCryptohackBadge(*username, *theme, *filename)
 	} else if *website == "rootme" {
-		rootme.CreateRootmeBadge(*username, *theme)
+		rootme.CreateRootmeBadge(*username, *theme, *filename)
 	}
 }
