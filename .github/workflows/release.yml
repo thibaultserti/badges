@@ -17,7 +17,7 @@ jobs:
         run: echo ::set-output name=tag::${GITHUB_REF#refs/*/}
       # CHECKOUT CODE
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2.3.4
         with:
           ref: ${{ steps.vars.outputs.tag }}
       # INSTALL GOLANG
