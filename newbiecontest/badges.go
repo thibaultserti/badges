@@ -87,7 +87,7 @@ func CreateNewbiecontestBadge(id int, theme string, filename string) error {
 	// write other text
 	dc.SetFontFace(fontOther)
 	dc.DrawStringAnchored("Level: "+profile.level, width/5, 0.85*height, 0.4, 0.5)
-	dc.DrawImageAnchored(thunder, 0.1*width, 0.85*height, 0.5, 0.5)
+	dc.DrawImageAnchored(thunder, 0.05*width, 0.85*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.score+" points", width/2, 0.45*height, 0.4, 0.5)
 	dc.DrawImageAnchored(star, 0.4*width, 0.45*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.6*height, 0.4, 0.5)
