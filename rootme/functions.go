@@ -1,9 +1,9 @@
 package rootme
 
-const levelmax = "elite"
+const levelmax = "legend"
 
-var pointsLevel = [5]int{3500, 7000, 10500, 14000, 17500}
-var nameLevel = [5]string{"newbie", "lamer", "programmer", "hacker", "elite"}
+var pointsLevel = [8]int{100, 500, 1976, 3454, 7999, 12687, 18226, 19500}
+var nameLevel = [8]string{"visitor", "curious", "trainee", "insider", "enthusiast", "hacker", "elite", "legend"}
 
 func computeLevel(score int) (level string) {
 	level = levelmax
