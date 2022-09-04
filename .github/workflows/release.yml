@@ -7,8 +7,6 @@ on:
 jobs:
   build:
     name: Create Release
-    # only runs on main
-    if: github.event.base_ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       # GET VERSION TAG
