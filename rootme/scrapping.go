@@ -47,7 +47,7 @@ func getProfileCrawling(username string) ProfileRootme {
 func getRootmeCrawling(username string) (rank string, score string, level string, nbChall string, avatar image.Image, err error) {
 	if username == "" {
 		rank, score, level, nbChall = "0", "0", "0", "0"
-		err = errors.New("Username is not valid")
+		err = errors.New("username is not valid")
 	} else {
 		c := colly.NewCollector()
 
@@ -56,7 +56,7 @@ func getRootmeCrawling(username string) (rank string, score string, level string
 		reScore := regexp.MustCompile("[0-9]+\nPoints")
 		reNbchall := regexp.MustCompile("[0-9]+\nChallenges")
 
-		c.OnHTML("div.medium-6 div.row div.small-3", func(e *colly.HTMLElement) {
+		c.OnHTML("div.medium-6 div.row div.small-6", func(e *colly.HTMLElement) {
 			match := reRank.FindString(e.Text)
 			if match != "" {
 				rank = reNumber.FindString(match)
@@ -84,6 +84,7 @@ func getRootmeCrawling(username string) (rank string, score string, level string
 			imgBytes, _ := ioutil.ReadAll(response.Body)
 			toto := bytes.NewReader(imgBytes)
 			avatar, _, err = image.Decode(toto)
+
 			if err != nil {
 				log.Fatal("Error", err)
 			}
@@ -92,7 +93,7 @@ func getRootmeCrawling(username string) (rank string, score string, level string
 		c.OnResponse(func(r *colly.Response) {
 			if r.StatusCode == 404 {
 				rank = "0"
-				err = errors.New("Username doesn't exist")
+				err = errors.New("username doesn't exist")
 			}
 		})
 

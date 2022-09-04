@@ -68,7 +68,7 @@ func CreateRootmeBadge(username string, theme string, filename string) error {
 	trophy = resize.Resize(width/20, 0, trophy, resize.Lanczos3)
 
 	// setup fonts
-	font, err := truetype.Parse(goregular.TTF)
+	font, _ := truetype.Parse(goregular.TTF)
 	fontUsername := truetype.NewFace(font, &truetype.Options{Size: width / 16})
 	fontOther := truetype.NewFace(font, &truetype.Options{Size: width / 28})
 
@@ -87,7 +87,7 @@ func CreateRootmeBadge(username string, theme string, filename string) error {
 	// write other text
 	dc.SetFontFace(fontOther)
 	dc.DrawStringAnchored("Level: "+profile.level, width/5, 0.85*height, 0.35, 0.5)
-	dc.DrawImageAnchored(thunder, 0.1*width, 0.85*height, 0.5, 0.5)
+	dc.DrawImageAnchored(thunder, 0.08*width, 0.85*height, 0.5, 0.5)
 	dc.DrawStringAnchored(profile.score+" points", width/2, 0.45*height, 0.4, 0.5)
 	dc.DrawImageAnchored(star, 0.4*width, 0.45*height, 0.6, 0.5)
 	dc.DrawStringAnchored(profile.rank+"/"+profile.nbTotalUsers, width/2, 0.6*height, 0.4, 0.5)
