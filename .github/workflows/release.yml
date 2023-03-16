@@ -20,7 +20,7 @@ jobs:
           ref: ${{ steps.vars.outputs.tag }}
       # INSTALL GOLANG
       - name: Install Go
-        uses: actions/setup-go@v2
+        uses: actions/setup-go@v4
         with:
           go-version: 1.14.x
       # BUILD THE BINARY
